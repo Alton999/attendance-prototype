@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
 	Typography,
 	Card,
-	Button,
 	Container,
 	Radio,
 	RadioGroup,
@@ -10,53 +9,40 @@ import {
 	FormControlLabel
 } from "@material-ui/core";
 
-import styled from "@emotion/styled";
+import useStyles from "./styles";
 
-const ComponentContainer = styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 100vh;
-`;
+import Results from "../../Components/Results/Results";
 
-const CustomCard = styled(Card)`
-	width: 90%;
-	padding: 1em;
-	height: 80vh;
-`;
-
-const MarginContainer = styled(Container)`
-	margin: 10px;
-`;
-
-const InlineContainer = styled.div`
-	display: inline-flex;
-	jusitfy-content: space-between;
-`;
-
-const ResultsContainer = styled.div``;
 const Home = () => {
+	const classes = useStyles();
 	const [attendanceType, setAttendanceType] = useState("");
 	const handleChange = (e) => {
 		setAttendanceType(e.target.value);
 	};
 	return (
-		<ComponentContainer>
-			<CustomCard>
-				<Typography variant="h3" align="center" gutterBottom>
+		<div className={classes.componentContainer}>
+			<Card className={classes.customCard}>
+				<Typography variant="h3" align="center" gutterBottom color="primary">
 					Student Attendance Organiser
 				</Typography>
-				<MarginContainer>
+				<Container className={classes.marginContainer}>
 					<Typography gutterBottom>
 						Welcome to the attendance builder
 					</Typography>
-				</MarginContainer>
-				<MarginContainer>
+				</Container>
+				<Container className={classes.marginContainer}>
 					<Typography>(Instructions go here)</Typography>
-				</MarginContainer>
-				<MarginContainer style={{ marginTop: "20px" }}>
-					<InlineContainer>
-						<Typography variant="h6" style={{ marginRight: "20px" }}>
+				</Container>
+				<Container
+					className={classes.marginContainer}
+					style={{ marginTop: "20px" }}
+				>
+					<div className={classes.inlineContainer}>
+						<Typography
+							variant="h6"
+							style={{ marginRight: "20px" }}
+							color="primary"
+						>
 							Which student identification are you using?
 						</Typography>
 						<FormControl component="fieldset">
@@ -89,13 +75,13 @@ const Home = () => {
 							</RadioGroup>
 						</FormControl>
 						<div>{attendanceType}</div>
-					</InlineContainer>
-				</MarginContainer>
-				<MarginContainer>
-					<Typography>Results:</Typography>
-				</MarginContainer>
-			</CustomCard>
-		</ComponentContainer>
+					</div>
+				</Container>
+				<Container className={classes.marginContainer}>
+					<Results results="" />
+				</Container>
+			</Card>
+		</div>
 	);
 };
 
